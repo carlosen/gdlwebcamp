@@ -327,6 +327,8 @@ div.logo img{
 /*Nav principal*/
 nav.navegacion-principal {
     display: none;
+    width: 100%;
+    clear: both;
 }
 nav.navegacion-principal a{
     font-family: 'Oswald', sans-serif;
