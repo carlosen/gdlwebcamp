@@ -315,6 +315,7 @@ div.barra{
 div.logo{
     width: 80%;
     float: left;
+    display: block;
 }
 div.logo img{
     width: 100%;
@@ -328,7 +329,7 @@ div.logo img{
 nav.navegacion-principal {
     display: none;
     width: 100%;
-    clear: both;
+    /*clear: both;*/
 }
 nav.navegacion-principal a{
     font-family: 'Oswald', sans-serif;
@@ -355,7 +356,7 @@ nav.navegacion-principal a:last-child:hover{
 
 @media only screen and (min-width:768px) {
     nav.navegacion-principal{
-        width: 67%;
+        width: 60%;
         float: right;
         text-align: right;
         display: block;
