@@ -163,11 +163,14 @@ $(function(){
     $('.menu-programa a:first').addClass('activo');
     
     $('.menu-programa a').on('click', function(){
+        
         $('.menu-programa a').removeClass('activo');
         $(this).addClass('activo');
+        /*$(this).removeClass('ocultar');*/
         $('.ocultar').hide();
         var enlace = $(this).attr('href');
-        $(enlace).fadeIn(1000);
+        console.log(enlace);
+        $('#'+enlace).fadeIn(1000);
         
         return false;
         

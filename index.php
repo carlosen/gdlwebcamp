@@ -14,56 +14,84 @@
             <div class="contenido-programa">
                 <div class="programa-evento">
                     <h2>Programa del evento</h2>
+                    <?php 
+                        try{
+                            require_once('includes/funciones/bd_conexion.php');
+                            $sql = "SELECT * FROM categoria_evento"; 
+                            $resultado = $conn->query($sql);
+                        }catch(Exception $e){
+                            $error = $e->getMessage();
+                        }
+                    ?>
                     <nav class="menu-programa">
-                        <a href="#talleres"><i class="fa fa-code"></i>Talleres</a>
-                        <a href="#conferencias"><i class="fa fa-comment"></i>Conferencias</a>
-                        <a href="#seminarios"><i class="fa fa-university"></i>Seminarios</a>
+                        <?php while($cat = $resultado->fetch_array(MYSQLI_ASSOC)){?>
+                            <a href="<?php echo strtolower($cat['cat_evento'])?>"><i class="<?php echo $cat['icono']?>"></i><?php echo $cat['cat_evento']?></a>
+                        <?php }?>
                     </nav>
-                    <div id="talleres" class="info-curso ocultar clearfix">
-                        <div class="detalle-evento">
-                            <h3>HTML5, CSS3 y JavaScript</h3>
-                            <p><i class="fa fa-clock"></i>16:00 hrs</p>
-                            <p><i class="fa fa-calendar"></i>10 de Dic</p>
-                            <p><i class="fa fa-user"></i>Juan Pablo de la Torre</p>
-                        </div>
-                        <div class="detalle-evento">
-                            <h3>Responsive Web Desing</h3>
-                            <p><i class="fa fa-clock"></i>20:00 hrs</p>
-                            <p><i class="fa fa-calendar"></i>10 de Dic</p>
-                            <p><i class="fa fa-user"></i>Juan Pablo de la Torre</p>
-                        </div>
-                        <a href="#" class="button float-rigth">Ver todos</a>
-                    </div><!--.talleres-->
-                    <div id="conferencias" class="info-curso ocultar clearfix">
-                        <div class="detalle-evento">
-                            <h3>Como ser freelancer</h3>
-                            <p><i class="fa fa-clock"></i>10:00 hrs</p>
-                            <p><i class="fa fa-calendar"></i>10 de Dic</p>
-                            <p><i class="fa fa-user"></i>Gregorio Sanchez</p>
-                        </div>
-                        <div class="detalle-evento">
-                            <h3>Tecnologías del futuro</h3>
-                            <p><i class="fa fa-clock"></i>17:00 hrs</p>
-                            <p><i class="fa fa-calendar"></i>10 de Dic</p>
-                            <p><i class="fa fa-user"></i>Susana Sanchez</p>
-                        </div>
-                        <a href="#" class="button float-rigth">Ver todos</a>
-                    </div><!--.conferencias-->
-                    <div id="seminarios" class="info-curso ocultar clearfix">
-                        <div class="detalle-evento">
-                            <h3>Diseño UI/UX para moviles</h3>
-                            <p><i class="fa fa-clock"></i>17:00 hrs</p>
-                            <p><i class="fa fa-calendar"></i>11 de Dic</p>
-                            <p><i class="fa fa-user"></i>Harold Garcia</p>
-                        </div>
-                        <div class="detalle-evento">
-                            <h3>Aprende a programar en una mañana</h3>
-                            <p><i class="fa fa-clock"></i>10:00 hrs</p>
-                            <p><i class="fa fa-calendar"></i>11 de Dic</p>
-                            <p><i class="fa fa-user"></i>Susana Rivera</p>
-                        </div>
-                        <a href="#" class="button float-rigth">Ver todos</a>
-                    </div><!--.seminarios-->
+                    <?php
+                        try{
+                            require_once('includes/funciones/bd_conexion.php');
+                            $sql = "SELECT evento_id, nombre_evento, fecha_evento, hora_evento, cat_evento, nombre_invitado, apellido_invitado ";
+                            $sql .= "FROM evento ";
+                            $sql .= "INNER JOIN categoria_evento ";
+                            $sql .= "ON evento.id_cat_evento=categoria_evento.id_categoria ";
+                            $sql .= "INNER JOIN invitados ";
+                            $sql .= "ON evento.id_inv=invitados.invitado_id ";
+                            $sql .= "AND evento.id_cat_evento = 1 ";
+                            $sql .= "ORDER BY evento_id LIMIT 2;";
+                            $sql .= "SELECT evento_id, nombre_evento, fecha_evento, hora_evento, cat_evento, nombre_invitado, apellido_invitado ";
+                            $sql .= "FROM evento ";
+                            $sql .= "INNER JOIN categoria_evento ";
+                            $sql .= "ON evento.id_cat_evento=categoria_evento.id_categoria ";
+                            $sql .= "INNER JOIN invitados ";
+                            $sql .= "ON evento.id_inv=invitados.invitado_id ";
+                            $sql .= "AND evento.id_cat_evento = 2 ";
+                            $sql .= "ORDER BY evento_id LIMIT 2;";
+                            $sql .= "SELECT evento_id, nombre_evento, fecha_evento, hora_evento, cat_evento, nombre_invitado, apellido_invitado ";
+                            $sql .= "FROM evento ";
+                            $sql .= "INNER JOIN categoria_evento ";
+                            $sql .= "ON evento.id_cat_evento=categoria_evento.id_categoria ";
+                            $sql .= "INNER JOIN invitados ";
+                            $sql .= "ON evento.id_inv=invitados.invitado_id ";
+                            $sql .= "AND evento.id_cat_evento = 3 ";
+                            $sql .= "ORDER BY evento_id LIMIT 2; ";
+                        }catch(Exception $e){
+                            $error = $e->getMessage();
+                        }
+                        $conn->multi_query($sql);
+                    ?>
+                    <?php 
+                        do{
+                            $resultado = $conn->store_result();
+                            $row = $resultado->fetch_all(MYSQLI_ASSOC);
+                    ?>
+                    <?php $i = 0?>
+                    <?php foreach($row as $evento):?>
+                        <?php if($i % 2 == 0) { ?>
+                            <div id="<?php echo strtolower($evento['cat_evento'])?>" class="info-curso ocultar clearfix">
+                        <?php } ?>
+                                <div class="detalle-evento">
+                                    <h3><?php echo utf8_encode($evento['nombre_evento'])?></h3>
+                                    <p><i class="fa fa-clock"></i><?php echo utf8_encode($evento['hora_evento'])?></p>
+                                    <p><i class="fa fa-calendar"></i><?php echo utf8_encode($evento['fecha_evento'])?></p>
+                                    <p><i class="fa fa-user"></i><?php echo utf8_encode($evento['nombre_invitado'])?></p>
+                                </div>
+                                <div class="detalle-evento">
+                                    <h3>Responsive Web Desing</h3>
+                                    <p><i class="fa fa-clock"></i>20:00 hrs</p>
+                                    <p><i class="fa fa-calendar"></i>10 de Dic</p>
+                                    <p><i class="fa fa-user"></i>Juan Pablo de la Torre</p>
+                                </div>
+                        <?php if($i % 2 == 1):?>       
+                            <a href="calendario.php" class="button float-rigth">Ver todos</a>
+                            </div><!--.talleres-->
+                        <?php endif; ?>
+                    <?php $i++; ?>
+                    <?php endforeach;?>
+                    <?php $resultado->free();?>
+                    <?php
+                        }while($conn->more_results() && $conn->next_result());
+                    ?>
                 </div><!--.programa-evento-->
             </div><!--.contenido-programa-->
         </section><!--.programa-->
