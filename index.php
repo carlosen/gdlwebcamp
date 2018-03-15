@@ -76,12 +76,6 @@
                                     <p><i class="fa fa-calendar"></i><?php echo utf8_encode($evento['fecha_evento'])?></p>
                                     <p><i class="fa fa-user"></i><?php echo utf8_encode($evento['nombre_invitado'])?></p>
                                 </div>
-                                <div class="detalle-evento">
-                                    <h3>Responsive Web Desing</h3>
-                                    <p><i class="fa fa-clock"></i>20:00 hrs</p>
-                                    <p><i class="fa fa-calendar"></i>10 de Dic</p>
-                                    <p><i class="fa fa-user"></i>Juan Pablo de la Torre</p>
-                                </div>
                         <?php if($i % 2 == 1):?>       
                             <a href="calendario.php" class="button float-rigth">Ver todos</a>
                             </div><!--.talleres-->

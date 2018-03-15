@@ -38,7 +38,9 @@ function initMap() {
         //Extras
         var etiquetas = document.getElementById("etiquetas");
         var camisas = document.getElementById("camisas");
-        
+		
+		//
+        botonRegistro.disabled = true;
         //Eventos
         if (document.getElementById('calcular')){
             calcular.addEventListener("click", calcularMontos);
@@ -104,6 +106,8 @@ function initMap() {
                         lista_productos.innerHTML += listadoProductos[i] + "<br/>";
                     }
                     suma.innerHTML = "$" + totalPagar.toFixed(2);
+					botonRegistro.disabled = false;
+					document.getElementById('total_pedido').value = totalPagar.toFixed(2);
                 }
             }/*calcularMontos*/
 
@@ -169,7 +173,6 @@ $(function(){
         /*$(this).removeClass('ocultar');*/
         $('.ocultar').hide();
         var enlace = $(this).attr('href');
-        console.log(enlace);
         $('#'+enlace).fadeIn(1000);
         
         return false;
