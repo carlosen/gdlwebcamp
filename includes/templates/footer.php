@@ -25,13 +25,11 @@
             </div>
             <p class="copyright">Todos los derechos Reservados GDLWEBCAMP 2016.</p>
         </footer>
-        
+		<!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us12.list-manage.com","uuid":"ae783be20e788d6d6025f2a52","lid":"d701da6124"}) })</script>-->
         <script src="js/vendor/modernizr-3.5.0.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
         <script>
             window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
@@ -45,6 +43,7 @@
     <script src="js/jquery.countdown.min.js"></script>
     <script src="js/jquery.lettering.js"></script>
     <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/main.js"></script>
     <?php 
 		$archivo = basename($_SERVER['PHP_SELF']);
 		$pagina = str_replace(".php", "", $archivo);

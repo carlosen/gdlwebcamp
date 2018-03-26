@@ -195,7 +195,7 @@ $(function(){
     
    
     /*Cuenta regresiva*/
-    $('.cuenta-regresiva').countdown('2018/03/10 09:00:00', function(event){
+    $('.cuenta-regresiva').countdown('2018/03/25 09:00:00', function(event){
         $('#dias').html(event.strftime('%D'));
         $('#horas').html(event.strftime('%H'));
         $('#minutos').html(event.strftime('%M'));
